@@ -7,6 +7,7 @@ const app = express()
 const helmet = require('helmet')
 const cors = require('cors')
 const xss = require('xss-clean')
+const mongoSanitize = require('express-mongo-sanitize')
 const rateLimiter = require('express-rate-limit')
 
 const notFoundMiddleware = require('./middleware/not-found');
@@ -28,13 +29,16 @@ app.use(rateLimiter({
 })
 )
 
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }
-app.use(helmet())
-app.use(cors(corsOptions))
+// const corsOptions = {
+//     origin: 'http://localhost:3000',
+//     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+//   }
+// app.use(helmet())
+
+//app.use(cors(corsOptions))
+app.use(cors())
 app.use(xss())
+app.use(mongoSanitize())
 
 if(process.env.NODE_ENV !== 'production') {
     app.use(morgan('dev'))
