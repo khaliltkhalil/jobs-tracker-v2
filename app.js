@@ -30,7 +30,7 @@ app.use(
 );
 
 const corsOptions = {
-  origin: "https://rainbow-naiad-17be60.netlify.app",
+  origin: "https://jobs-tracker-app.netlify.app",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 // app.use(helmet())
